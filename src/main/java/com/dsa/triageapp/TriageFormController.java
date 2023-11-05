@@ -22,6 +22,7 @@ import java.util.PriorityQueue;
 public class TriageFormController {
 public javafx.scene.layout.BorderPane BorderPane;
     PriorityQueue<Patient1> patientQueue = new PriorityQueue<>((p1, p2) -> p1.getLevel() - p2.getLevel());
+    int[] counter = new int[5];
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -75,6 +76,7 @@ public javafx.scene.layout.BorderPane BorderPane;
         patient.setLevel(setLevel(level_cbo.getValue()));
         patient.setComplaint(complaint_txtField.getText());
         patient.setCondition(condition_txtField.getText());
+        count(level_cbo.getValue());
         patientQueue.add(patient);
         JOptionPane.showMessageDialog(null, name+" added");
         clearFields();
@@ -92,6 +94,10 @@ public javafx.scene.layout.BorderPane BorderPane;
 
         StringBuilder sb = new StringBuilder();
         sb.append("Patient Queue (").append(copyQueue.size()).append(" patients):\n");
+        String count = String.format("Resuscitation: %d\nEmergency: %d\nUrgent: %d" +
+                                    "\nSemi-urgent: %d\nNon-urgent: %d", counter[0], counter[1],
+                                      counter[2], counter[3], counter[4]);
+        sb.append(count);
 
         for (Patient1 patient : copyQueue) {
             sb.append(patient.getData()).append("\n");
@@ -103,12 +109,15 @@ public javafx.scene.layout.BorderPane BorderPane;
 
     @FXML
     public void goToFullForm(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/dsa/triageapp/patientRegistrationForm-view.fxml")));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dsa/triageapp/patientRegistrationForm-view.fxml"));
+        Parent root = loader.load();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene newScene = new Scene(root);
         currentStage.setScene(newScene);
+        currentStage.centerOnScreen();
         currentStage.show();
     }
+
 
     @FXML
     public void exit(){
@@ -156,5 +165,14 @@ public javafx.scene.layout.BorderPane BorderPane;
         gender_cbo.setPromptText("Gender");
         level_cbo.setPromptText("Level");
         birthDate_datePicker.setUserData(LocalDate.now());
+    }
+    public void count(String selectedPriority){
+        switch (selectedPriority) {
+            case "Resuscitation"-> counter[0] += 1;
+            case "Emergency" -> counter[1] += 1;
+            case "Urgent" -> counter[2] += 1;
+            case "Semi-urgent" -> counter[3] += 1;
+            case "Non-urgent" -> counter[4] += 1;
+        };
     }
 }

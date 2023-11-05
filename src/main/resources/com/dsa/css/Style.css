@@ -89,6 +89,6 @@
 }
 
 .clearButton:hover {
-    -fx-background-color: #00f; /* Change background color on hover */
+    -fx-background-color: #2f5f78; /* Change background color on hover */
     -fx-text-fill: #fff; /* Change text color on hover */
 }

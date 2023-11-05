@@ -56,7 +56,14 @@
                   <Font size="16.0" />
                </font>
             </Text>
-            <ComboBox fx:id="gender_cbo" layoutX="453.0" layoutY="161.0" prefWidth="198.5" promptText="Gender" style="-fx-font-size: 16;" />
+            <ComboBox fx:id="gender_cbo" layoutX="453.0" layoutY="161.0" prefWidth="198.5" promptText="Gender" style="-fx-font-size: 16; -fx-background-color: white;">
+               <effect>
+                  <DropShadow height="5.0" radius="2.0" width="5.0">
+                     <color>
+                        <Color red="0.7098039388656616" green="0.7058823704719543" blue="0.7058823704719543" />
+                     </color>
+                  </DropShadow>
+               </effect></ComboBox>
             <Text fill="#2f5f78" layoutX="453.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender">
                <font>
                   <Font size="16.0" />
@@ -77,7 +84,14 @@
                   <Font size="16.0" />
                </font>
             </Text>
-            <ComboBox fx:id="level_cbo" layoutX="139.0" layoutY="305.0" prefWidth="198.5" promptText="Level" style="-fx-font-size: 16; -fx-font-color: #2f5f78;" />
+            <ComboBox fx:id="level_cbo" layoutX="139.0" layoutY="305.0" prefWidth="198.5" promptText="Level" style="-fx-font-size: 16; -fx-font-color: #2f5f78; -fx-background-color: white;">
+               <effect>
+                  <DropShadow height="5.0" radius="2.0" width="5.0">
+                     <color>
+                        <Color red="0.7098039388656616" green="0.7058823704719543" blue="0.7058823704719543" />
+                     </color>
+                  </DropShadow>
+               </effect></ComboBox>
             <Text fill="#2f5f78" layoutX="140.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prorty Level">
                <font>
                   <Font size="16.0" />
@@ -93,9 +107,9 @@
                   <Font size="16.0" />
                </font>
                <effect>
-                  <DropShadow>
+                  <DropShadow height="5.0" radius="2.0" width="5.0">
                      <color>
-                        <Color red="0.7105262875556946" green="0.7039473652839661" blue="0.7039473652839661" />
+                        <Color red="0.7098039388656616" green="0.7058823704719543" blue="0.7058823704719543" />
                      </color>
                   </DropShadow>
                </effect>

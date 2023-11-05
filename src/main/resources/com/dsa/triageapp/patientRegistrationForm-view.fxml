@@ -1,11 +1,187 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dsa.triageapp.PatientRegistrationController">
-   <children>
-      <Text layoutX="210.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HEHh;ahsd" />
-   </children>
-</AnchorPane>
+<BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="990.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dsa.triageapp.PatientRegistrationController">
+   <center>
+      <AnchorPane prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: White;" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="lastName_textField" layoutX="58.0" layoutY="107.0" promptText="Last Name">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <Text fill="#2f5f78" layoutX="353.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Registration Form" AnchorPane.bottomAnchor="476.9765625" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="346.36328123505" AnchorPane.topAnchor="29.1015625">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="#2f5f78" layoutX="58.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Name">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="firstName_textField" layoutX="266.0" layoutY="107.0" promptText="First Name">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="middle_textField" layoutX="474.0" layoutY="107.0" promptText="Middle initial">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <Text fill="#2f5f78" layoutX="57.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="address_textField" layoutX="57.0" layoutY="247.0" prefHeight="36.0" prefWidth="616.0" promptText="Home Address">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <Text fill="#2f5f78" layoutX="474.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <ComboBox fx:id="gender_cbo" layoutX="474.0" layoutY="174.0" prefWidth="198.5" promptText="Gender" style="-fx-font-size: 16; -fx-font-color: #2f5f78; -fx-background-color: white;">
+               <effect>
+                  <DropShadow height="5.0" radius="2.0" width="5.0">
+                     <color>
+                        <Color red="0.7098039388656616" green="0.7058823704719543" blue="0.7058823704719543" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </ComboBox>
+            <Text fill="#2f5f78" layoutX="58.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact Info">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="contact_textField" layoutX="58.0" layoutY="175.0" promptText="No.">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <DatePicker fx:id="date_datePicker" layoutX="266.0" layoutY="175.0" prefHeight="36.0" prefWidth="198.5" promptText="mm/dd/yyyy" style="-fx-font-size: 16;" />
+            <Text fill="#2f5f78" layoutX="266.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Birth date">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="occupation_textField" layoutX="58.0" layoutY="317.0" promptText="Occupation">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <Text fill="#2f5f78" layoutX="58.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Occupation">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fill="#2f5f78" layoutX="266.0" layoutY="308.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Civil Status">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="nationality_textField" layoutX="474.0" layoutY="317.0" promptText="Nationality">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <Text fill="#2f5f78" layoutX="474.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nationality">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Line endX="-740.0" endY="358.5" layoutX="1425.0" layoutY="92.0" startX="-740.0" startY="-23.5" stroke="#b5b4b4" />
+            <Text fill="#2f5f78" layoutX="695.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Allergies">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="allergies_textField" layoutX="695.0" layoutY="104.0" prefHeight="36.0" prefWidth="263.0" promptText="Allergies">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <Text fill="#2f5f78" layoutX="695.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Medication/s">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fill="#2f5f78" layoutX="695.0" layoutY="307.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Medical History">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextArea fx:id="medHistory_textarea" layoutX="695.0" layoutY="318.0" prefHeight="132.0" prefWidth="263.0" promptText="Medical History">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextArea>
+            <TextField fx:id="emergencyName_textField" layoutX="58.0" layoutY="411.0" promptText="Name">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <Text fill="#2f5f78" layoutX="58.0" layoutY="401.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Emergency Contact">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Button fx:id="register_btn" layoutX="373.0" layoutY="476.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="278.0" styleClass="button1" stylesheets="@../css/Style.css" text="Register" textFill="#2f5f78" AnchorPane.leftAnchor="356.0">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <effect>
+                  <DropShadow height="5.0" radius="2.0" width="5.0">
+                     <color>
+                        <Color red="0.7098039388656616" green="0.7058823704719543" blue="0.7058823704719543" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Button>
+            <TextField fx:id="contactNo2_textField" layoutX="266.0" layoutY="412.0" promptText="Contact Number">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="relationship_textField" layoutX="474.0" layoutY="412.0" promptText="Relationship">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <TextArea fx:id="currMed_textArea" layoutX="695.0" layoutY="173.0" prefHeight="111.0" prefWidth="263.0" promptText="Current Medication">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextArea>
+            <Line endX="-764.0" endY="272.0" layoutX="1435.0" layoutY="102.0" startX="-1377.5" startY="272.0" stroke="#b5b4b4" />
+            <TextField fx:id="status_textField" layoutX="266.0" layoutY="317.0" promptText="Civil Status">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <Button layoutY="487.0" mnemonicParsing="false" onAction="#back" prefHeight="46.0" prefWidth="30.0" style="-fx-background-color: Transparent; -fx-cursor: hand;" text="&lt;" textFill="#2f5f78">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
