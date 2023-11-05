@@ -1,6 +1,7 @@
 package com.dsa.triageapp;
 
 import com.dsa.triageapp.Classes.Patient1;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -107,6 +108,11 @@ public javafx.scene.layout.BorderPane BorderPane;
         Scene newScene = new Scene(root);
         currentStage.setScene(newScene);
         currentStage.show();
+    }
+
+    @FXML
+    public void exit(){
+        Platform.exit();
     }
 
     public void initialize() {

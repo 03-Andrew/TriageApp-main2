@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dsa.triageapp.TriageFormController">
+<BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dsa.triageapp.TriageFormController">
    <center>
       <AnchorPane prefHeight="450.0" prefWidth="688.0" stylesheets="@../css/Style.css" BorderPane.alignment="CENTER">
          <children>
@@ -105,23 +105,17 @@
                   <Font size="16.0" />
                </font>
             </Button>
-            <Button fx:id="next_btn" layoutX="640.0" layoutY="378.0" mnemonicParsing="false" onAction="#viewQueue" style="-fx-background-color: transparent; -fx-cursor: hand;" text="&gt;" textFill="#2f5f78">
+            <Button fx:id="next_btn" layoutX="640.0" layoutY="384.0" mnemonicParsing="false" onAction="#viewQueue" style="-fx-background-color: transparent; -fx-cursor: hand;" text="&gt;" textFill="#2f5f78">
                <font>
                   <Font name="System Bold Italic" size="24.0" />
+               </font>
+            </Button>
+            <Button fx:id="exit_btn" layoutX="640.0" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="49.0" style="-fx-background-color: transparent; -fx-cursor: hand;" styleClass="clearButton" stylesheets="@../css/Style.css" text="X" textFill="#2f5f78">
+               <font>
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Button>
          </children>
       </AnchorPane>
    </center>
-   <top>
-      <AnchorPane prefHeight="26.0" prefWidth="688.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="exit_btn" layoutX="641.0" layoutY="1.0" mnemonicParsing="false" onAction="#viewQueue" prefWidth="49.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="X" textFill="#2f5f78">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Button>
-         </children>
-      </AnchorPane>
-   </top>
 </BorderPane>
