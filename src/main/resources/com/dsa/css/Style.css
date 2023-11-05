@@ -1,0 +1,94 @@
+.root{
+    -fx-font-family: "Arial"
+}
+
+.btnMenu{
+    -fx-background-radius: 0;
+        -fx-background-color: #fbc4ab;
+    -fx-font-size:16;
+}
+
+.btnMenu:hover{
+    -fx-background-color: #f08080;
+    -fx-font-color: "";
+}
+
+.logoBG {
+  -fx-background-color: linear-gradient(
+    to bottom right,
+    #78A2CC,
+    #fef9f3
+  );
+}
+
+.btn1{
+    -fx-background-color: #BB646B;
+    -fx-font-size: 30;
+    -fx-text-fill: white;
+}
+
+.btn1:hover{
+    -fx-background-color: #89454A;
+}
+
+.btn2{
+    -fx-background-color: #EDB8BC;
+    -fx-font-size: 30;
+}
+
+.btn2:hover{
+    -fx-background-color: #E1B2B5;
+}
+
+.btnClose{
+    -fx-background-color: #BB646B;
+    -fx-font-weight:bold;
+    -fx-text-fill: white;
+}
+
+.btnClose:hover{
+    -fx-background-color: #E1B2B5;
+}
+
+.header{
+    -fx-font-size: 20;
+    -fx-font-weight:bold;
+    -fx-text-fill: white;
+}
+
+.bodyTxt{
+    -fx-font-size: 16;
+}
+
+/* styles.css */
+.button1 {
+  -fx-background-color: white;
+  -fx-border-radius: 2px;
+  -fx-text-fill: #2f5f78;
+  -fx-min-height: 36px; /* Set the minimum height to 36 pixels */
+  -fx-pref-height: 36px;
+}
+
+.button1:hover {
+  -fx-background-color: black;
+  -fx-text-fill: white;
+  -fx-background-radius: 5px;
+  -fx-transition: background 0.3s, text-fill 0.3s;
+}
+
+.clearButton {
+    -fx-background-color: transparent; /* Clear background */
+    -fx-border-color: transparent; /* No border */
+    -fx-text-fill: #000; /* Text color */
+    -fx-font-size: 14px; /* Font size */
+
+    /* Transition for hover effect */
+    -fx-background-insets: 0;
+    -fx-padding: 5 10;
+    -fx-background-radius: 5px;
+}
+
+.clearButton:hover {
+    -fx-background-color: #00f; /* Change background color on hover */
+    -fx-text-fill: #fff; /* Change text color on hover */
+}
