@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 
 public class PatientRegistrationController {
@@ -97,7 +98,7 @@ public class PatientRegistrationController {
     @FXML
     public void addPatient(){
         PatientInfo patientInfo = new PatientInfo();
-        String name = String.format("%s, %s %s", lastName_textField, firstName_textField, middle_textField);
+        String name = String.format("%s, %s %s", lastName_textField.getText(), firstName_textField.getText(), middle_textField.getText());
         patientInfo.setName(name);
         patientInfo.setContactInfo(contact_textField.getText());
         patientInfo.setAddress(address_textField.getText());
@@ -114,9 +115,14 @@ public class PatientRegistrationController {
         patientInfo.setCurrMedication(currMed_textArea.getText());
         patientInfo.setMedicalHistory(medHistory_textarea.getText());
 
+        DataBase db = new DataBase("PatientInfo");
+        db.addToFile(patientInfo.storeToDB());
+        JOptionPane.showMessageDialog(null, "Added to file");
 
 
     }
+
+
     @FXML
     public void back(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dsa/triageapp/triageForm-view.fxml"));

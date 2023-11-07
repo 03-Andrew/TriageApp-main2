@@ -22,6 +22,7 @@ public class PatientInfo {
     private String currMedication;
     private String medicalHistory;
 
+
     public PatientInfo(){
 
     }
@@ -152,5 +153,11 @@ public class PatientInfo {
         Period period = Period.between(birthLocalDate, currentDate);
         return period.getYears();
     }
+
+    public String storeToDB(){
+        return name + "||" + contactInfo + "||" + date + "||" + age + "||" + gender + "||" + address + "||" + occupation + "||" + civilStatus + "||" + nationality + "||" + emergencyContactName + "||" + emergencyContactNumber + "||" + relationship + "||" + allergies + "||" + currMedication + "||" + medicalHistory + "\n";
+
+    }
+
 
 }

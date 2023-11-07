@@ -13,7 +13,7 @@ public class DataBase {
     private final ArrayList<String[]> arr = new ArrayList<>();
 
     public DataBase(String filename){
-        file = new File("src/main/resources/com/dsa/database/"+filename+".txt");
+        file = new File("src/main/resources/com/dsa/Database/"+filename+".txt");
     }
 
     public void errorMessage(String msg){

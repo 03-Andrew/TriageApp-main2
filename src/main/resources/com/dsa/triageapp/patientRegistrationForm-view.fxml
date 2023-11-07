@@ -13,9 +13,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="990.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dsa.triageapp.PatientRegistrationController">
+<BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="998.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dsa.triageapp.PatientRegistrationController">
    <center>
-      <AnchorPane prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: White;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="538.0" prefWidth="1018.0" style="-fx-background-color: White;" BorderPane.alignment="CENTER">
          <children>
             <TextField fx:id="lastName_textField" layoutX="58.0" layoutY="107.0" promptText="Last Name">
                <font>
@@ -143,7 +143,7 @@
                   <Font size="16.0" />
                </font>
             </Text>
-            <Button fx:id="register_btn" layoutX="373.0" layoutY="476.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="278.0" styleClass="button1" stylesheets="@../css/Style.css" text="Register" textFill="#2f5f78" AnchorPane.leftAnchor="356.0">
+            <Button fx:id="register_btn" layoutX="373.0" layoutY="476.0" mnemonicParsing="false" onAction="#addPatient" prefHeight="36.0" prefWidth="278.0" styleClass="button1" stylesheets="@../css/Style.css" text="Register" textFill="#2f5f78" AnchorPane.leftAnchor="356.0">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
