@@ -30,6 +30,8 @@ public class TriageFormController {
 
     private TriageQueue triageQueue;
     private int[] counter;
+    private boolean[] isStationAvailable;
+
 
     @FXML
     private Button add_btn;
@@ -101,7 +103,7 @@ public class TriageFormController {
         Parent root = loader.load();
 
         TriageQueueController triageQC = loader.getController();
-        triageQC.setCounter(counter);
+        triageQC.setCounterAndStation(counter, isStationAvailable);
         triageQC.setTriageQueue(triageQueue);
 
         Stage newStage = new Stage(); // Create a new stage for the new scene
@@ -176,7 +178,7 @@ public class TriageFormController {
         Parent root = loader.load();
         PatientTicketingController patientTC = loader.getController();
         patientTC.setTriageQueue(triageQueue);
-        patientTC.setCounter(counter);
+        patientTC.setCounterAndStation(counter, isStationAvailable);
         Stage newStage = new Stage(); // Create a new stage for the new scene
 
         Scene newScene = new Scene(root);
@@ -265,8 +267,9 @@ public class TriageFormController {
         this.triageQueue = triageQueue;
         //JOptionPane.showMessageDialog(null, triageQueue.heapCount());
     }
-    public void setCounter(int[] counter){
+    public void setCounterAndStation(int[] counter, boolean[] isStationAvailable){
         this.counter = counter;
+        this.isStationAvailable = isStationAvailable;
         //JOptionPane.showMessageDialog(null, counter.length);
     }
 

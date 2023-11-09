@@ -60,8 +60,10 @@ public class TriageQueue {
         }
         array[++count] = value;
         int index = count;
-        while (index > 1 && array[index].getPriorityNumber() < array[index / 2].getPriorityNumber()) {
-            // Swap the current element with its parent if it is smaller
+        while (index > 1 && (array[index].getPriorityNumber() < array[index / 2].getPriorityNumber() ||
+                            (array[index].getPriorityNumber() == array[index / 2].getPriorityNumber() &&
+                                    array[index].getTimeStamp().isBefore(array[index / 2].getTimeStamp())))) {
+            // Swap the current element with its parent if it is smaller or has an earlier timestamp
             TriageTicket temp = array[index];
             array[index] = array[index / 2];
             array[index / 2] = temp;
@@ -69,6 +71,7 @@ public class TriageQueue {
             index = index / 2; // Move up to the parent index
         }
     }
+
 
     public String delete() {
         // Adrian Carlo A. Menguita

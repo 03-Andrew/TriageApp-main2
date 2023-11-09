@@ -96,7 +96,7 @@ public class TriageQueueController {
     private double x = 0, y = 0;
     private TriageQueue triageQueue;
     private int[] counter;
-    private boolean s1, s2, s3;
+    private boolean[] isStationAvailable;
     private ObservableList<TriageTicket> patients = FXCollections.observableArrayList();
 
     public void setTriageQueue(TriageQueue triageQueue){
@@ -132,7 +132,7 @@ public class TriageQueueController {
         Parent root = loader.load();
         PatientTicketingController ptc = loader.getController();
         ptc.setTriageQueue(triageQueue);
-        ptc.setCounter(counter);
+        ptc.setCounterAndStation(counter,isStationAvailable);
         //ptc.setCounter1(counter);
         Stage newStage = new Stage(); // Create a new stage for the new scene
 
@@ -161,11 +161,11 @@ public class TriageQueueController {
         root.setOnMouseReleased(event1 -> newStage.setOpacity(1));
 
     }
-    public void viewQueue(){
+    public void alert(String message){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Patient Added");
+        alert.setTitle("Patient");
         alert.setHeaderText(null);
-        alert.setContentText(triageQueue.displayHeap());
+        alert.setContentText(message);
         alert.showAndWait();
     }
 
@@ -186,11 +186,14 @@ public class TriageQueueController {
     }
     public void treatPatient(){
         if(!isStationsAvailable()){
-            JOptionPane.showMessageDialog(null, "No stations available");
+           alert("No Stations available");
+            return;
+        } if(triageQueue.isEmpty()){
+            alert("No patients");
             return;
         }
         TriageTicket patient  = triageQueue.poll();
-        JOptionPane.showMessageDialog(null, patient.getPatientInfo().getName());
+        sendToStation(patient);
         minus(patient.getPriorityLevel());
         setLabels();
         patients.remove(0);
@@ -199,18 +202,60 @@ public class TriageQueueController {
     }
 
     public boolean isStationsAvailable(){
-        return s1 || s2 || s3;
+        return isStationAvailable[0] || isStationAvailable[1] || isStationAvailable[2];
     }
 
 
     public void sendToStation(TriageTicket patient){
-        if(s1){
 
-        } else if (s2){
+        String[] info = {"Patient: " + patient.getName(),
+                "Priority level: " + patient.getPriorityLevel(),
+                "Age: " + patient.getAge() + "\tGender: " + patient.getGender(),
+                "Contact number: " + patient.getNumber(),
+                "Chief Complaint: " + patient.getChiefComplaint(),
+                "Current Condition: " + patient.getCurrentCondition(),
+                "Current Medication: " + patient.getCurrentMedication()};
 
-        } else {
-
+        if(isStationAvailable[0]){
+            treatingLbl1.setText("Station 1");
+            listView1.getItems().addAll(info);
+            isStationAvailable[0] = false;
+        } else if (isStationAvailable[1]){
+            treatingLbl2.setText("Station 2");
+            listView2.getItems().addAll(info);
+            isStationAvailable[1] = false;
+        } else if (isStationAvailable[2]){
+            treatingLbl3.setText("Station 3");
+            listView3.getItems().addAll(info);
+            isStationAvailable[2] = false;
         }
+    }
+    public void nextPatient1(){
+        if(isStationAvailable[0]){
+            alert("Zero patients under care");
+            return;
+        }
+        isStationAvailable[0] = true;
+        listView1.getItems().clear();
+        treatingLbl1.setText("Station 1 | Next Patient");
+    }
+    public void nextPatient2(){
+        if(isStationAvailable[1]){
+            alert("Zero patients under care");
+            return;
+        }
+        isStationAvailable[1] = true;
+        listView2.getItems().clear();
+        treatingLbl2.setText("Station 2 | Next Patient");
+    }
+    public void nextPatient3(){
+        if(isStationAvailable[2]){
+            alert("Zero patients under care");
+            return;
+        }
+        isStationAvailable[2] = true;
+        listView3.getItems().clear();
+        treatingLbl3.setText("Station 3 | Next Patient");
     }
 
 
@@ -235,8 +280,9 @@ public class TriageQueueController {
             counter[i] = Integer.parseInt(strArr[i].trim());
         }
     }
-    public void setCounter(int[] counter){
+    public void setCounterAndStation(int[] counter, boolean[] isStationAvailable){
         this.counter = counter;
+        this.isStationAvailable = isStationAvailable;
         setLabels();
         //JOptionPane.showMessageDialog(null,counter.length);
     }

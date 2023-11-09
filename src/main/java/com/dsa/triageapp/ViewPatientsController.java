@@ -24,6 +24,7 @@ public class ViewPatientsController {
     private Patient selectedPatient;
     private TriageQueue triageQueue;
     private int[] counter;
+    private boolean[] isStationAvailable;
       @FXML
     private TableColumn<Patient, String> BirthDate;
 
@@ -106,7 +107,7 @@ public class ViewPatientsController {
         Parent root = loader.load();
 
         PatientTicketingController patientTC = loader.getController();
-        patientTC.setCounter(counter);
+        patientTC.setCounterAndStation(counter, isStationAvailable);
         patientTC.setTriageQueue(triageQueue);
 
         Stage newStage = new Stage(); // Create a new stage for the new scene
@@ -168,7 +169,8 @@ public class ViewPatientsController {
         this.triageQueue = triageQueue;
         //JOptionPane.showMessageDialog(null,triageQueue.heapCount());
     }
-    public void setCounter(int[] counter){
+    public void setCounterAndStation(int[] counter, boolean[] isStationAvailable){
+        this.isStationAvailable = isStationAvailable;
         this.counter = counter;
         //JOptionPane.showMessageDialog(null, counter.length);
     }

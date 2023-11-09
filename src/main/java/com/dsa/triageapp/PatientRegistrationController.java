@@ -72,6 +72,7 @@ public class PatientRegistrationController {
     private TextField status_textField;
     private int[] counter;
     private TriageQueue triageQueue;
+    private boolean[] isStationAvailable;
     public void initialize() {
         // Create an ObservableList of gender options
         ObservableList<String> genderOptions = FXCollections.observableArrayList(
@@ -119,7 +120,7 @@ public class PatientRegistrationController {
         Parent root = loader.load();
 
         TriageFormController triageFC = loader.getController();
-        triageFC.setCounter(counter);
+        triageFC.setCounterAndStation(counter, isStationAvailable);
         triageFC.setTriageQueue(triageQueue);
 
         Stage newStage = new Stage(); // Create a new stage for the new scene

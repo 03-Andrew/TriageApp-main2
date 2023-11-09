@@ -59,6 +59,7 @@ public class PatientTicketingController {
     private int[] counter;
     private Patient patient;
     private TriageQueue queue;
+    private boolean[] isStationAvailable;
 
     public void initialize(){
         //updateCounterArr();
@@ -118,7 +119,7 @@ public class PatientTicketingController {
 
         TriageFormController triageFC = loader.getController();
         triageFC.setTriageQueue(queue);
-        triageFC.setCounter(counter);
+        triageFC.setCounterAndStation(counter, isStationAvailable);
 
         Stage newStage = new Stage(); // Create a new stage for the new scene
 
@@ -152,7 +153,7 @@ public class PatientTicketingController {
 
         ViewPatientsController viewPC = loader.getController();
         viewPC.setTriageQueue(queue);
-        viewPC.setCounter(counter);
+        viewPC.setCounterAndStation(counter, isStationAvailable);
 
 
         Stage newStage = new Stage(); // Create a new stage for the new scene
@@ -189,7 +190,7 @@ public class PatientTicketingController {
         TriageQueueController triageQC = loader.getController();
         // Set the updated values in the target controller
         triageQC.setTriageQueue(queue);
-        triageQC.setCounter(counter);
+        triageQC.setCounterAndStation(counter, isStationAvailable);
 
         Stage newStage = new Stage();
         Scene newScene = new Scene(root);
@@ -205,7 +206,8 @@ public class PatientTicketingController {
     }
 
     public void addToQueue(){
-        TriageTicket ticket = new TriageTicket(patient, complaintTxtField.getText(),conditionTxtField.getText(),prioLevelCbo.getValue());
+        TriageTicket ticket = new TriageTicket(patient, complaintTxtField.getText(),
+                conditionTxtField.getText(),prioLevelCbo.getValue(),currentMedTxtField.getText());
         queue.upHeap(ticket);
         count(ticket.getPriorityLevel());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -237,8 +239,9 @@ public class PatientTicketingController {
             //JOptionPane.showMessageDialog(null, triageQueue.heapCount());
         }
     }
-    public void setCounter(int[] counter){
+    public void setCounterAndStation(int[] counter, boolean[] isStationAvailable){
         this.counter = counter;
+        this.isStationAvailable = isStationAvailable;
         System.out.println(counter.length);
     }
     public void clearFields(){

@@ -55,10 +55,10 @@
             <TableView fx:id="queueTable" layoutX="26.0" layoutY="102.0" prefHeight="200.0" prefWidth="795.0">
               <columns>
                 <TableColumn fx:id="level" prefWidth="82.5" text="Prio Level" />
-                <TableColumn fx:id="name" prefWidth="99.5" text="Name" />
-                  <TableColumn fx:id="age" prefWidth="41.0" text="Age" />
-                  <TableColumn fx:id="gender" prefWidth="53.66668701171875" text="Gender" />
-                  <TableColumn fx:id="number" prefWidth="166.33331298828125" text="Contact number" />
+                <TableColumn fx:id="name" prefWidth="141.0" text="Name" />
+                  <TableColumn fx:id="age" prefWidth="54.0" text="Age" />
+                  <TableColumn fx:id="gender" prefWidth="62.5" text="Gender" />
+                  <TableColumn fx:id="number" prefWidth="103.5" text="Contact number" />
                   <TableColumn fx:id="complaint" prefWidth="181.0" text="Complaint" />
                   <TableColumn fx:id="condition" prefWidth="169.5" text="Condition" />
               </columns>
@@ -73,17 +73,17 @@
             <ListView fx:id="listView1" layoutX="28.0" layoutY="400.0" prefHeight="145.0" prefWidth="258.0" />
             <ListView fx:id="listView2" layoutX="296.0" layoutY="400.0" prefHeight="145.0" prefWidth="258.0" />
             <ListView fx:id="listView3" layoutX="564.0" layoutY="400.0" prefHeight="145.0" prefWidth="258.0" />
-            <Label fx:id="treatingLbl1" layoutX="28.0" layoutY="370.0" text="Station 1 | Treating: ">
+            <Label fx:id="treatingLbl1" layoutX="28.0" layoutY="370.0" text="Station 1 | Next Patient ">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="treatingLbl2" layoutX="296.0" layoutY="370.0" text="Station 2 | Treating: ">
+            <Label fx:id="treatingLbl2" layoutX="296.0" layoutY="370.0" text="Station 2 | Next Patient ">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Button fx:id="nextPatientBtn" layoutX="28.0" layoutY="553.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="258.0" style="-fx-background-color: white;" text="Next Patient">
+            <Button fx:id="nextPatientBtn" layoutX="28.0" layoutY="553.0" mnemonicParsing="false" onAction="#nextPatient1" prefHeight="25.0" prefWidth="258.0" style="-fx-background-color: white;" text="Next Patient">
                <effect>
                   <DropShadow height="5.0" radius="2.0" width="5.0">
                      <color>
@@ -92,12 +92,12 @@
                   </DropShadow>
                </effect>
             </Button>
-            <Label fx:id="treatingLbl3" layoutX="564.0" layoutY="370.0" text="Station 3 | Treating: ">
+            <Label fx:id="treatingLbl3" layoutX="564.0" layoutY="370.0" text="Station 3 | Next Patient ">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Button fx:id="nextPatientBtn2" layoutX="295.0" layoutY="553.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="260.0" style="-fx-background-color: white;" text="Next Patient">
+            <Button fx:id="nextPatientBtn2" layoutX="295.0" layoutY="553.0" mnemonicParsing="false" onAction="#nextPatient2" prefHeight="25.0" prefWidth="260.0" style="-fx-background-color: white;" text="Next Patient">
                <effect>
                   <DropShadow height="5.0" radius="2.0" width="5.0">
                      <color>
@@ -106,7 +106,7 @@
                   </DropShadow>
                </effect>
             </Button>
-            <Button fx:id="nextPatientBtn3" layoutX="563.0" layoutY="553.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="260.0" style="-fx-background-color: white;" text="Next Patient">
+            <Button fx:id="nextPatientBtn3" layoutX="563.0" layoutY="553.0" mnemonicParsing="false" onAction="#nextPatient3" prefHeight="25.0" prefWidth="260.0" style="-fx-background-color: white;" text="Next Patient">
                <effect>
                   <DropShadow height="5.0" radius="2.0" width="5.0">
                      <color>

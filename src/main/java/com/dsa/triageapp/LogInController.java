@@ -26,17 +26,19 @@ public class LogInController {
 
     private TriageQueue triageQueue = new TriageQueue();
     private int[] counter = new int[5];
+    private boolean[] isStationAvailable = new boolean[]{true, true, true};
+
 
     private boolean isLoginValid(String username, String password) {
         return username.equals("Admin") && password.equals("Admin123");
     }
 
     public void loadView(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("triageForm-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("patientTicketing-view.fxml"));
         Parent root = loader.load();
-        TriageFormController triageFC = loader.getController();
+        PatientTicketingController triageFC = loader.getController();
         triageFC.setTriageQueue(triageQueue);
-        triageFC.setCounter(counter);
+        triageFC.setCounterAndStation(counter, isStationAvailable);
         Stage newStage = new Stage(); // Create a new stage for the new scene
 
         Scene newScene = new Scene(root);

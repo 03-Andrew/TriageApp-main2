@@ -4,16 +4,23 @@ package com.dsa.triageapp;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class TriageTicket {
     Patient patientInfo;
-    SimpleStringProperty chiefComplaint, currentCondition, priorityLevel, patientNumber, name, number, gender;
+    SimpleStringProperty chiefComplaint, currentCondition, priorityLevel, patientNumber, name, number, gender, currentMedication;
     SimpleIntegerProperty priorityNumber, age;
-    public TriageTicket(Patient patientInfo, String chiefComplaint, String currentCondition, String priorityLevel){
+    LocalDateTime timeStamp;
+    public TriageTicket(Patient patientInfo, String chiefComplaint, String currentCondition, String priorityLevel, String currentMedication){
         this.patientInfo = patientInfo;
         this.chiefComplaint = new SimpleStringProperty(chiefComplaint);
         this.currentCondition = new SimpleStringProperty(currentCondition);
         this.priorityLevel = new SimpleStringProperty(priorityLevel);
         this.priorityNumber = new SimpleIntegerProperty(getPriority(priorityLevel));
+        this.currentMedication = new SimpleStringProperty(currentMedication);
+        this.timeStamp = LocalDateTime.now();
     }
     public TriageTicket(int priorityNumber){
         this.priorityNumber = new SimpleIntegerProperty(priorityNumber);
@@ -25,7 +32,8 @@ public class TriageTicket {
     public String getNumber() {return patientInfo.getContactNumber();}
     public String getGender() {return patientInfo.getGender();}
     public int getAge() {return patientInfo.getAge();}
-
+    public String getCurrentMedication(){return currentMedication.get();}
+    public LocalDateTime getTimeStamp(){ return timeStamp;}
     public void setPatientInfo(Patient patientInfo) {
         this.patientInfo = patientInfo;
     }
