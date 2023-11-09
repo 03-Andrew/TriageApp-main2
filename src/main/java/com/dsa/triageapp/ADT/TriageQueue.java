@@ -1,22 +1,23 @@
 package com.dsa.triageapp.ADT;
 
-import com.dsa.triageapp.NotInUse.PatientModel;
 
-public class PriorityQueue {
+import com.dsa.triageapp.TriageTicket;
+
+public class TriageQueue {
     // Min heap
-    private PatientModel[] array;
+    private TriageTicket[] array;
     private int count, capacity;
     private final int arraySizeIncrement = 5;
 
-    public PriorityQueue() {
+    public TriageQueue() {
         capacity = 5;
-        array = new PatientModel[capacity + 1];
+        array = new TriageTicket[capacity + 1];
         count = 0;
     }
 
-    public PriorityQueue(int capacity) {
+    public TriageQueue(int capacity) {
         this.capacity = capacity;
-        array = new PatientModel[capacity + 1];
+        array = new TriageTicket[capacity + 1];
         count = 0;
     }
 
@@ -34,7 +35,7 @@ public class PriorityQueue {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
-        array = new PatientModel[capacity + 1];
+        array = new TriageTicket[capacity + 1];
         System.out.println(capacity + 1);
     }
 
@@ -43,7 +44,7 @@ public class PriorityQueue {
     }
 
     public void increaseArraySize() {
-        PatientModel[] temp = new PatientModel[capacity + arraySizeIncrement + 1];
+        TriageTicket[] temp = new TriageTicket[capacity + arraySizeIncrement + 1];
         // Copy the array
         for (int i = 0; i < array.length; i++) {
             temp[i] = array[i];
@@ -53,15 +54,15 @@ public class PriorityQueue {
         capacity += arraySizeIncrement;
     }
 
-    public void upHeap(PatientModel value) {
+    public void upHeap(TriageTicket value) {
         if (count + 1 > capacity) {
             increaseArraySize();
         }
         array[++count] = value;
         int index = count;
-        while (index > 1 && array[index].getLevel() < array[index / 2].getLevel()) {
+        while (index > 1 && array[index].getPriorityNumber() < array[index / 2].getPriorityNumber()) {
             // Swap the current element with its parent if it is smaller
-            PatientModel temp = array[index];
+            TriageTicket temp = array[index];
             array[index] = array[index / 2];
             array[index / 2] = temp;
 
@@ -78,23 +79,8 @@ public class PriorityQueue {
             return hold;
         } else return "Heap is empty!";
     }
-    public PatientModel poll() {
-        if (count == 0) {
-            // Handle the case when the heap is empty
-            return null; // Or throw an exception or return a default value
-        }
 
-        PatientModel p = array[0];
-        array[0] = array[count - 1]; // Move the last element to the root
-        count--; // Decrease the count
-
-        heapify(); // Restore the heap property
-
-        return p;
-    }
-
-
-    public String deleteNode(PatientModel value) {
+    public String deleteNode(int value) {
         // Adrian Carlo A. Menguita
         int nodeIndex = getIndex(value);
         if (nodeIndex == -1) return "Value is not present within the heap";
@@ -120,13 +106,14 @@ public class PriorityQueue {
                 smallerChild = leftChild;
             } else {
                 // Find the smaller child
-                smallerChild = (array[rightChild].getLevel() < array[leftChild].getLevel()) ? rightChild : leftChild;
+                smallerChild = (array[rightChild].getPriorityNumber()
+                        < array[leftChild].getPriorityNumber()) ? rightChild : leftChild;
             }
 
 
             // If the smaller child is lesser than the current element, swap them
-            if (array[smallerChild].getLevel() < array[index].getLevel()) {
-                PatientModel temp = array[smallerChild];
+            if (array[smallerChild].getPriorityNumber() < array[index].getPriorityNumber()) {
+                TriageTicket temp = array[smallerChild];
                 array[smallerChild] = array[index];
                 array[index] = temp;
 
@@ -137,7 +124,7 @@ public class PriorityQueue {
         } //end of while
     } //end of method
 
-    public void heapify(int count, PatientModel[] array) {
+    public void heapify(int count, TriageTicket[] array) {
         if (count <= 1) {
             return; // No need to down-heap if there's only one element or no elements
         }
@@ -153,13 +140,14 @@ public class PriorityQueue {
                 smallerChild = leftChild;
             } else {
                 // Find the smaller child
-                smallerChild = (array[rightChild].getLevel() < array[leftChild].getLevel()) ? rightChild : leftChild;
+                smallerChild = (array[rightChild].getPriorityNumber()
+                        < array[leftChild].getPriorityNumber()) ? rightChild : leftChild;
             }
 
 
             // If the smaller child is lesser than the current element, swap them
-            if (array[smallerChild].getLevel() < array[index].getLevel()) {
-                PatientModel temp = array[smallerChild];
+            if (array[smallerChild].getPriorityNumber() < array[index].getPriorityNumber()) {
+                TriageTicket temp = array[smallerChild];
                 array[smallerChild] = array[index];
                 array[index] = temp;
 
@@ -170,10 +158,9 @@ public class PriorityQueue {
         } //end of while
     } //end of method
 
-    public PatientModel[] heapSort() {
-        PatientModel[] sorted = new PatientModel[count + 1];
-        PatientModel[] copy = new PatientModel[array.length];
-        System.arraycopy(array, 0, copy, 0, array.length);
+    public TriageTicket[] heapSort() {
+        TriageTicket[] sorted = new TriageTicket[count + 1];
+        TriageTicket[] copy = array;
 
         int index = 0, counter = count;
         for (int i = counter; i >= 1; i--, index++) {
@@ -186,29 +173,18 @@ public class PriorityQueue {
         return sorted;
     }
 
-     public PriorityQueue duplicateQueue() {
-        PriorityQueue newQueue = new PriorityQueue(this.capacity);
-
-        // Copy the elements from the current queue to the new queue
-        for (int i = 1; i <= this.count; i++) {
-            newQueue.upHeap(this.array[i]);
-        }
-
-        return newQueue;
-    }
-
-    public boolean checkDuplicate(PatientModel value) {
+    public boolean checkDuplicate(int value) {
         for (int i = 1; i <= count; i++) {
-            if (array[i] == value) {
+            if (array[i].getPriorityNumber() == value) {
                 return true;
             }
         } //end of loop
         return false;
     }//end of method
 
-    private int getIndex(PatientModel value) {
+    private int getIndex(int value) {
         for (int i = 1; i <= count; i++) {
-            if (array[i] == value) {
+            if (array[i].getPriorityNumber() == value) {
                 return i;
             }
         }//end of loop
@@ -222,7 +198,7 @@ public class PriorityQueue {
             hold = "Heap is empty!";
         } else {
             for (int i = 1; i <= count; i++) {
-                hold += array[i].getData2();
+                hold += array[i].getInfo() + " \n";
             }//end of loop
         }
         return hold;
@@ -235,18 +211,30 @@ public class PriorityQueue {
         count = 0;
     }//end of method
 
-    public PatientModel peek() {
-        return (isEmpty()) ? null : array[0];
+    public String peek() {
+        return (isEmpty()) ? "Queue is Empty" : array[1].getInfo();
     }
-    public PatientModel[] toArray() {
-        PatientModel[] result = new PatientModel[count];
-
-        // Copy the elements from the queue to the result array
-        for (int i = 1; i <= count; i++) {
-            result[i - 1] = array[i];
+    public TriageTicket poll() {
+        if (isEmpty()) {
+            return null; // or throw an exception based on your preference
         }
 
-        return result;
-    }
+        TriageTicket root = array[1];
+        array[1] = array[count--];
+        heapify();
 
+        return root;
+    }
+    public TriageQueue duplicateHeap() {
+        TriageQueue duplicate = new TriageQueue(capacity); // create a new instance with the same capacity
+
+        // Copy the elements to the new heap
+        for (int i = 1; i <= count; i++) {
+            duplicate.array[i] = array[i];
+        }
+
+        duplicate.count = count; // Set the count of the new heap
+
+        return duplicate;
+    }
 }

@@ -1,7 +1,5 @@
-package com.dsa.triageapp;
+package com.dsa.triageapp.NotInUse;
 
-import com.dsa.triageapp.Classes.Patient;
-import com.dsa.triageapp.Classes.Patient1;
 import javafx.collections.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,12 +12,10 @@ import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.PriorityQueue;
 
 public class HelloController {
-    PriorityQueue<Patient1> patientQueue;
+    PriorityQueue<PatientModel> patientQueue;
     StringBuilder sb = new StringBuilder();
     private Stage stage;
     private Scene scene;
@@ -143,6 +139,7 @@ public class HelloController {
     }
     @FXML
     protected void addPatient(ActionEvent event){
+        /*
         patientQueue = new PriorityQueue<>((p1, p2) -> p1.getLevel() - p2.getLevel());
         String name = String.format("%s, %s %s.", lastName_txtField.getText(), firstName_txtField.getText(), middleName_txtField.getText());
         LocalDate date = birth_datePicker.getValue();
@@ -155,6 +152,8 @@ public class HelloController {
         JOptionPane.showMessageDialog(null, "Patient added");
         clearFields();
 
+         */
+
     }
 
     @FXML
@@ -165,11 +164,11 @@ public class HelloController {
         }
 
         // Create a copy of the queue without removing elements
-        PriorityQueue<Patient1> copyQueue = new PriorityQueue<>(patientQueue);
+        PriorityQueue<PatientModel> copyQueue = new PriorityQueue<>(patientQueue);
 
         StringBuilder sb = new StringBuilder();
         while (!copyQueue.isEmpty()) {
-            Patient1 newPatient = copyQueue.poll();
+            PatientModel newPatient = copyQueue.poll();
             sb.append(newPatient.getData()).append("\n");
         }
 

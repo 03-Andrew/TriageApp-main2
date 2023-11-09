@@ -4,29 +4,30 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dsa.triageapp.HelloController">
+<AnchorPane prefHeight="637.0" prefWidth="934.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dsa.triageapp.NotInUse.ViewTriageQueue">
    <children>
-      <VBox prefHeight="720.0" prefWidth="229.0" style="-fx-background-color: #ADD9D8;" />
-      <Label layoutX="262.0" layoutY="32.0" text="Patient triage Queue" textFill="#2f5f78">
+      <Label layoutX="35.0" layoutY="32.0" text="Patient triage Queue" textFill="#2f5f78">
          <font>
             <Font name="Segoe UI Bold" size="32.0" />
          </font>
       </Label>
-      <HBox layoutX="262.0" layoutY="94.0" prefHeight="59.0" prefWidth="750.0">
+      <HBox layoutX="35.0" layoutY="71.0" prefHeight="60.0" prefWidth="601.0">
          <children>
             <VBox>
                <children>
-                  <Label fx:id="emergencyCount_lbl" prefHeight="35.0" prefWidth="100.0" text="Count">
+                  <Label fx:id="resuscitationCount_lbl" prefHeight="35.0" prefWidth="100.0" text="Count">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label text="Emergency">
+                  <Label text="Resuscitation">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -38,12 +39,12 @@
             </VBox>
             <VBox>
                <children>
-                  <Label fx:id="vUrgentCount_lbl" prefHeight="35.0" prefWidth="100.0" text="Count">
+                  <Label fx:id="emergencyCount_lbl" prefHeight="35.0" prefWidth="100.0" text="Count">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label text="Very Urgent">
+                  <Label text="Emergency">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -72,12 +73,12 @@
             </VBox>
             <VBox>
                <children>
-                  <Label fx:id="lUrgentCount_lbl" prefHeight="35.0" prefWidth="100.0" text="Count">
+                  <Label fx:id="semiUrgentCount_lbl" prefHeight="35.0" prefWidth="100.0" text="Count">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label text="Less Urgent">
+                  <Label text="Semi-urgent">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -89,12 +90,12 @@
             </VBox>
             <VBox>
                <children>
-                  <Label prefHeight="35.0" prefWidth="100.0" text="Count">
+                  <Label fx:id="nonUrgentCount_lbl" prefHeight="35.0" prefWidth="100.0" text="Count">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label text="Routne">
+                  <Label text="Non-urgent">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -109,7 +110,46 @@
             <Insets />
          </opaqueInsets>
       </HBox>
-      <ListView fx:id="historyListView" layoutX="262.0" layoutY="180.0" prefHeight="361.0" prefWidth="541.0" />
-      <Button layoutX="262.0" layoutY="560.0" mnemonicParsing="false" onAction="#switchToScene1" text="Button" />
+      <Button layoutY="695.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="88.0" text="Back" />
+      <TableView fx:id="queueTable" layoutX="35.0" layoutY="168.0" prefHeight="231.0" prefWidth="997.0" visible="false">
+        <columns>
+          <TableColumn fx:id="nameColumn" prefWidth="100.0" text="name" />
+          <TableColumn fx:id="contactNumColumn" prefWidth="122.5" text="number" />
+            <TableColumn fx:id="ageColumn" prefWidth="55.0" text="age" />
+            <TableColumn fx:id="genderColumn" prefWidth="59.0" text="gender" />
+            <TableColumn fx:id="complaintColumn" prefWidth="235.0" text="complaint" />
+            <TableColumn fx:id="conditionColumn" prefWidth="158.5" text="condition" />
+            <TableColumn fx:id="levelColumn" prefWidth="83.0" text="level" />
+        </columns>
+      </TableView>
+      <ListView fx:id="myListView" layoutX="35.0" layoutY="137.0" prefHeight="200.0" prefWidth="833.0" />
+      <Label layoutX="35.0" layoutY="412.0" text="Nurse Station" textFill="#2f5f78">
+         <font>
+            <Font name="Segoe UI Bold" size="32.0" />
+         </font>
+      </Label>
+      <Label layoutX="35.0" layoutY="451.0" text="Station 1 | Treating: ">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button layoutX="35.0" layoutY="611.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="270.0" text="Complete" />
+      <ListView layoutX="35.0" layoutY="476.0" prefHeight="131.0" prefWidth="270.0" />
+      <Label layoutX="314.0" layoutY="451.0" text="Station 2 | Treating: ">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button layoutX="314.0" layoutY="611.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="270.0" text="Complete" />
+      <ListView layoutX="314.0" layoutY="476.0" prefHeight="131.0" prefWidth="270.0" />
+      <Label layoutX="594.0" layoutY="451.0" text="Station 3 | Treating: ">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button layoutX="594.0" layoutY="611.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="270.0" text="Complete" />
+      <ListView layoutX="594.0" layoutY="476.0" prefHeight="131.0" prefWidth="270.0" />
+      <Button layoutX="35.0" layoutY="348.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="126.0" text="Treat Patient " />
+      <Button layoutX="171.0" layoutY="348.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="126.0" text="Treat Patient " />
    </children>
 </AnchorPane>

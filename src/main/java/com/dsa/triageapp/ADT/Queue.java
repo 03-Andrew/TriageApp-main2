@@ -1,10 +1,5 @@
 package com.dsa.triageapp.ADT;
 
-import com.dsa.triageapp.Classes.Patient1;
-
-import javax.swing.*;
-import java.util.Arrays;
-
 public class Queue<T> { // Renamed class and added generics
     private int front, rear, capacity;
     private T[] patient;

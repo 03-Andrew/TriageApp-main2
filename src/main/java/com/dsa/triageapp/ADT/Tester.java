@@ -1,29 +1,17 @@
 package com.dsa.triageapp.ADT;
 
-import com.dsa.triageapp.Classes.Patient1;
+import com.dsa.triageapp.NotInUse.PatientModel;
 
-import javax.swing.*;
-import java.nio.channels.Pipe;
 import java.time.LocalDate;
-import java.util.Arrays;
 
 public class Tester {
     public static void main(String[] args) {
-        PriorityQueue priorityQueue = new PriorityQueue();
-        Patient1 p = new Patient1("bob", LocalDate.now());
-        p.setLevel(3);
-        Patient1 p2 = new Patient1("Bbbb", LocalDate.now());
-        p.setLevel(1);
-        priorityQueue.upHeap(p);
-        priorityQueue.upHeap(p2);
-        JOptionPane.showMessageDialog(null, Arrays.stream(priorityQueue.heapSort()).toArray());
-        System.out.println("Prio: " + priorityQueue.heapCount());
-        Patient1[] patient1 = priorityQueue.heapSort();
-        for(int i = 0; i < priorityQueue.heapCount(); i++){
-            JOptionPane.showMessageDialog(null, patient1[i].getLevel());
-        }
-
-
-
+        PriorityQueue q = new PriorityQueue();
+        PatientModel p = new PatientModel(3, "qwerttyuiy", LocalDate.now(), "Male","0987654321","Headache","inpain");
+        PatientModel p2 = new PatientModel(4, "qwerty", LocalDate.now(), "Male","0987654321","Headache","inpain");
+        q.upHeap(p);
+        q.upHeap(p2);
+        System.out.println(q.poll());
+        System.out.println(q.poll().getName());
     }
 }

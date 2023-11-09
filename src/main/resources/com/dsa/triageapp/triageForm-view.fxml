@@ -11,11 +11,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dsa.triageapp.TriageFormController">
+<BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="318.0" prefWidth="687.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dsa.triageapp.TriageFormController">
    <center>
-      <AnchorPane prefHeight="450.0" prefWidth="688.0" stylesheets="@../css/Style.css" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="450.0" prefWidth="688.0" style="-fx-background-color: white;" stylesheets="@../css/Style.css" BorderPane.alignment="CENTER">
          <children>
-            <Text fill="#2f5f78" layoutX="240.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Assesment">
+            <Text fill="#2f5f78" layoutX="231.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Registration">
                <font>
                   <Font name="Segoe UI Bold" size="24.0" />
                </font>
@@ -69,40 +69,7 @@
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fill="#2f5f78" layoutX="36.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chief Complaint">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Text>
-            <TextField fx:id="complaint_txtField" layoutX="36.0" layoutY="232.0" prefHeight="36.0" prefWidth="302.0" promptText="Chief Complaint">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </TextField>
-            <Text fill="#2f5f78" layoutX="348.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Condition">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Text>
-            <ComboBox fx:id="level_cbo" layoutX="139.0" layoutY="305.0" prefWidth="198.5" promptText="Level" style="-fx-font-size: 16; -fx-font-color: #2f5f78; -fx-background-color: white;">
-               <effect>
-                  <DropShadow height="5.0" radius="2.0" width="5.0">
-                     <color>
-                        <Color red="0.7098039388656616" green="0.7058823704719543" blue="0.7058823704719543" />
-                     </color>
-                  </DropShadow>
-               </effect></ComboBox>
-            <Text fill="#2f5f78" layoutX="140.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prorty Level">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Text>
-            <TextField fx:id="condition_txtField" layoutX="348.0" layoutY="232.0" prefHeight="36.0" prefWidth="302.0" promptText="Current Condition">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </TextField>
-            <Button fx:id="add_btn" layoutX="348.0" layoutY="305.0" mnemonicParsing="false" onAction="#addPatient" prefHeight="36.0" prefWidth="198.5" styleClass="button1" stylesheets="@../css/Style.css" text="Add patient" textFill="#2f5f78">
+            <Button fx:id="add_btn" layoutX="244.0" layoutY="211.0" mnemonicParsing="false" onAction="#addPatient" prefHeight="36.0" prefWidth="198.5" styleClass="button1" stylesheets="@../css/Style.css" text="Add patient" textFill="#2f5f78">
                <font>
                   <Font size="16.0" />
                </font>
@@ -114,22 +81,30 @@
                   </DropShadow>
                </effect>
             </Button>
-            <Button fx:id="openFull_btn" layoutX="235.0" layoutY="354.0" mnemonicParsing="false" onAction="#goToFullForm" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Open Full Registration form" textFill="#2f5f78">
+            <Button fx:id="openFull_btn" layoutX="236.0" layoutY="257.0" mnemonicParsing="false" onAction="#goToFullForm" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Open Full Registration form" textFill="#2f5f78">
                <font>
                   <Font size="16.0" />
                </font>
             </Button>
-            <Button fx:id="next_btn" layoutX="640.0" layoutY="384.0" mnemonicParsing="false" onAction="#viewQueue" style="-fx-background-color: transparent; -fx-cursor: hand;" text="&gt;" textFill="#2f5f78">
+            <Button fx:id="next_btn" layoutX="627.0" layoutY="281.0" mnemonicParsing="false" onAction="#goToTicket" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Ticket" textFill="#2f5f78">
                <font>
-                  <Font name="System Bold Italic" size="24.0" />
+                  <Font name="System Bold Italic" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="exit_btn" layoutX="640.0" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="49.0" style="-fx-background-color: transparent; -fx-cursor: hand;" styleClass="clearButton" stylesheets="@../css/Style.css" text="X" textFill="#2f5f78">
+            <Button fx:id="exit_btn" layoutX="637.0" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="49.0" style="-fx-background-color: transparent; -fx-cursor: hand;" styleClass="clearButton" stylesheets="@../css/Style.css" text="X" textFill="#2f5f78">
                <font>
                   <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="viewQueueBtn" layoutX="544.0" layoutY="281.0" mnemonicParsing="false" onAction="#viewQueue" style="-fx-background-color: transparent; -fx-cursor: hand;" text="View Queue" textFill="#2f5f78">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
                </font>
             </Button>
          </children>
       </AnchorPane>
    </center>
+   <effect>
+      <DropShadow />
+   </effect>
 </BorderPane>

@@ -1,6 +1,7 @@
 package com.dsa.triageapp;
 
-import com.dsa.triageapp.Classes.Patient1;
+import com.dsa.triageapp.ADT.PriorityQueue;
+import com.dsa.triageapp.ADT.TriageQueue;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,20 +13,23 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import javax.swing.*;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Objects;
-import java.util.PriorityQueue;
+//import java.util.PriorityQueue;
+
 
 public class TriageFormController {
-public javafx.scene.layout.BorderPane BorderPane;
-    PriorityQueue<Patient1> patientQueue = new PriorityQueue<>((p1, p2) -> p1.getLevel() - p2.getLevel());
-    int[] counter = new int[5];
+    private double x = 0, y = 0;
+
     private Stage stage;
     private Scene scene;
     private Parent root;
+
+    private TriageQueue triageQueue;
+    private int[] counter;
 
     @FXML
     private Button add_btn;
@@ -67,85 +71,186 @@ public javafx.scene.layout.BorderPane BorderPane;
     private Button openFull_btn;
 
     @FXML
-    protected void addPatient(ActionEvent event){
+    private Button viewQueueBtn;
+
+    @FXML
+    protected void addPatient(ActionEvent event) {
 
         String name = String.format("%s, %s %s", lastName_txtField.getText(), firstName_txtField.getText(), middle_txtField.getText());
         LocalDate date = birthDate_datePicker.getValue();
-        Patient1 patient = new Patient1(name, date);
-        patient.setGender(gender_cbo.getValue());
-        patient.setLevel(setLevel(level_cbo.getValue()));
-        patient.setComplaint(complaint_txtField.getText());
-        patient.setCondition(condition_txtField.getText());
-        count(level_cbo.getValue());
-        patientQueue.add(patient);
-        JOptionPane.showMessageDialog(null, name+" added");
+        Patient patient = new Patient(name, gender_cbo.getValue(), date, contact_txtField.getText());
+        DataBase db = new DataBase("PatientInfo1");
+        db.addToFile(patient.dbString1());
         clearFields();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Patient Added");
+        alert.setHeaderText(null);
+        alert.setContentText("Patient Added");
+        alert.showAndWait();
+        //JOptionPane.showMessageDialog(null, "Patient Added");
+
+
 
     }
+
+
+
     @FXML
     public void viewQueue(ActionEvent event) throws IOException {
-        if (patientQueue == null || patientQueue.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No Patients");
-            return;
-        }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("TriageQueue-view.fxml"));
+        Parent root = loader.load();
 
-        // Create a copy of the queue without removing elements
-        PriorityQueue<Patient1> copyQueue = new PriorityQueue<>(patientQueue);
+        TriageQueueController triageQC = loader.getController();
+        triageQC.setCounter(counter);
+        triageQC.setTriageQueue(triageQueue);
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("Patient Queue (").append(copyQueue.size()).append(" patients):\n");
-        String count = String.format("Resuscitation: %d\nEmergency: %d\nUrgent: %d" +
-                                    "\nSemi-urgent: %d\nNon-urgent: %d", counter[0], counter[1],
-                                      counter[2], counter[3], counter[4]);
-        sb.append(count);
+        Stage newStage = new Stage(); // Create a new stage for the new scene
 
-        for (Patient1 patient : copyQueue) {
-            sb.append(patient.getData()).append("\n");
-        }
+        Scene newScene = new Scene(root);
+        newStage.setScene(newScene);
+        newStage.centerOnScreen();
+        newStage.setResizable(false);
+        newStage.initStyle(StageStyle.TRANSPARENT);
+        newStage.setTitle("Triage Queue");
+        newStage.show();
 
-        JOptionPane.showMessageDialog(null, sb.toString());
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close();
+
+
+        root.setOnMousePressed(event1 -> {
+            x = event1.getSceneX();
+            y = event1.getSceneY();
+        });
+
+        root.setOnMouseDragged(event1 -> {
+            newStage.setX(event1.getScreenX() - x);
+            newStage.setY(event1.getScreenY() - y);
+        });
+
+        root.setOnMouseReleased(event1 -> newStage.setOpacity(1));
+
     }
 
 
     @FXML
     public void goToFullForm(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dsa/triageapp/patientRegistrationForm-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("patientRegistrationForm-view.fxml"));
         Parent root = loader.load();
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        PatientRegistrationController patientRC = loader.getController();
+        patientRC.setCounterAndQueue(counter, triageQueue);
+
+        Stage newStage = new Stage(); // Create a new stage for the new scene
+
         Scene newScene = new Scene(root);
-        currentStage.setScene(newScene);
-        currentStage.centerOnScreen();
-        currentStage.show();
+        newStage.setScene(newScene);
+        newStage.centerOnScreen();
+        newStage.setResizable(false);
+        newStage.initStyle(StageStyle.TRANSPARENT);
+        newStage.setTitle("Triage Queue");
+        newStage.show();
+
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close();
+
+
+        root.setOnMousePressed(event1 -> {
+            x = event1.getSceneX();
+            y = event1.getSceneY();
+        });
+
+        root.setOnMouseDragged(event1 -> {
+            newStage.setX(event1.getScreenX() - x);
+            newStage.setY(event1.getScreenY() - y);
+        });
+
+        root.setOnMouseReleased(event1 -> newStage.setOpacity(1));
+
+
     }
 
+    @FXML
+    public void goToTicket(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("patientTicketing-view.fxml"));
+        Parent root = loader.load();
+        PatientTicketingController patientTC = loader.getController();
+        patientTC.setTriageQueue(triageQueue);
+        patientTC.setCounter(counter);
+        Stage newStage = new Stage(); // Create a new stage for the new scene
+
+        Scene newScene = new Scene(root);
+        newStage.setScene(newScene);
+        newStage.centerOnScreen();
+        newStage.setResizable(false);
+        newStage.initStyle(StageStyle.TRANSPARENT);
+        newStage.setTitle("Triage Queue");
+        newStage.show();
+
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close();
+
+
+        root.setOnMousePressed(event1 -> {
+            x = event1.getSceneX();
+            y = event1.getSceneY();
+        });
+
+        root.setOnMouseDragged(event1 -> {
+            newStage.setX(event1.getScreenX() - x);
+            newStage.setY(event1.getScreenY() - y);
+        });
+
+        root.setOnMouseReleased(event1 -> newStage.setOpacity(1));
+    }
+
+    public void loadView(ActionEvent event, String file) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(file));
+        Parent root = loader.load();
+
+        Stage newStage = new Stage(); // Create a new stage for the new scene
+
+        Scene newScene = new Scene(root);
+        newStage.setScene(newScene);
+        newStage.centerOnScreen();
+        newStage.setResizable(false);
+        newStage.initStyle(StageStyle.TRANSPARENT);
+        newStage.setTitle("Triage Queue");
+        newStage.show();
+
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close();
+
+
+        root.setOnMousePressed(event1 -> {
+            x = event1.getSceneX();
+            y = event1.getSceneY();
+        });
+
+        root.setOnMouseDragged(event1 -> {
+            newStage.setX(event1.getScreenX() - x);
+            newStage.setY(event1.getScreenY() - y);
+        });
+
+        root.setOnMouseReleased(event1 -> newStage.setOpacity(1));
+
+    }
 
     @FXML
-    public void exit(){
+    public void exit() {
         Platform.exit();
     }
 
+
     public void initialize() {
-        // Create an ObservableList of gender options
         ObservableList<String> genderOptions = FXCollections.observableArrayList(
                 "Male", "Female"
         );
-         // Set the gender options to the ComboBox
-        if (gender_cbo != null) {
-            gender_cbo.setItems(genderOptions);
-        }
-        ObservableList<String> priorityOptions = FXCollections.observableArrayList("Resuscitation",
-            "Emergency",
-            "Urgent",
-            "Semi-urgent",
-            "Non-urgent"
-        );
+        gender_cbo.setItems(genderOptions);
 
-        // Set the priority options to the ComboBox
-        if(level_cbo != null) {
-            level_cbo.setItems(priorityOptions);
-        }
     }
-    public int setLevel(String selectedPriority){
+
+    public int setLevel(String selectedPriority) {
         return switch (selectedPriority) {
             case "Resuscitation" -> 1;
             case "Emergency" -> 2;
@@ -155,24 +260,22 @@ public javafx.scene.layout.BorderPane BorderPane;
             default -> 0;
         };
     }
-    public void clearFields(){
+
+    public void setTriageQueue(TriageQueue triageQueue){
+        this.triageQueue = triageQueue;
+        //JOptionPane.showMessageDialog(null, triageQueue.heapCount());
+    }
+    public void setCounter(int[] counter){
+        this.counter = counter;
+        //JOptionPane.showMessageDialog(null, counter.length);
+    }
+
+    public void clearFields() {
         firstName_txtField.setText("");
         lastName_txtField.setText("");
         middle_txtField.setText("");
         contact_txtField.setText("");
-        complaint_txtField.setText("");
-        condition_txtField.setText("");
         gender_cbo.setPromptText("Gender");
-        level_cbo.setPromptText("Level");
         birthDate_datePicker.setUserData(LocalDate.now());
-    }
-    public void count(String selectedPriority){
-        switch (selectedPriority) {
-            case "Resuscitation"-> counter[0] += 1;
-            case "Emergency" -> counter[1] += 1;
-            case "Urgent" -> counter[2] += 1;
-            case "Semi-urgent" -> counter[3] += 1;
-            case "Non-urgent" -> counter[4] += 1;
-        };
     }
 }

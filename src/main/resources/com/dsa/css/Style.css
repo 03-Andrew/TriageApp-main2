@@ -22,13 +22,14 @@
 }
 
 .btn1{
-    -fx-background-color: #BB646B;
-    -fx-font-size: 30;
-    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-font-size: 24;
+    -fx-text-fill: #2f5f78;
 }
 
 .btn1:hover{
-    -fx-background-color: #89454A;
+    -fx-background-color: #2f5f78;
+    -fx-text-fill: white;
 }
 
 .btn2{
@@ -70,7 +71,7 @@
 }
 
 .button1:hover {
-  -fx-background-color: black;
+  -fx-background-color: #2f5f78;
   -fx-text-fill: white;
   -fx-background-radius: 5px;
   -fx-transition: background 0.3s, text-fill 0.3s;
@@ -92,3 +93,45 @@
     -fx-background-color: #2f5f78; /* Change background color on hover */
     -fx-text-fill: #fff; /* Change text color on hover */
 }
+
+/* Set the text color for the ComboBox items */
+.combo-box .list-cell {
+    -fx-text-fill: #2f5f78; /* Change the text color to red */
+}
+
+/* Set the text color for the selected ComboBox item */
+.combo-box .list-cell:selected {
+    -fx-text-fill: #2f5f78; /* Change the text color to green for selected item */
+}
+
+
+/* Style for the entire TableView */
+.table-view {
+    -fx-background-color: white; /* Set the background color */
+}
+
+/* Style for table headers */
+.table-view .column-header {
+    -fx-background-color: #e0e0e0; /* Set the header background color */
+}
+
+
+/* Style for the header text */
+.table-view .column-header .label {
+    -fx-text-fill: #2f5f78; /* Set the header text color to red */
+}
+
+/* Style for alternating row colors */
+
+
+.table-view {
+    -fx-background-color: #ffffff; /* Set the background color */
+}
+
+.Pane {
+    -fx-background-image: url('Logo.png');
+    -fx-background-size: cover; /* Adjust as needed */
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+}
+

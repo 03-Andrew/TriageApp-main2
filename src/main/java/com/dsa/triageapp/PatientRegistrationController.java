@@ -1,5 +1,6 @@
 package com.dsa.triageapp;
 
+import com.dsa.triageapp.ADT.TriageQueue;
 import com.dsa.triageapp.Classes.PatientInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -68,7 +70,8 @@ public class PatientRegistrationController {
 
     @FXML
     private TextField status_textField;
-
+    private int[] counter;
+    private TriageQueue triageQueue;
     public void initialize() {
         // Create an ObservableList of gender options
         ObservableList<String> genderOptions = FXCollections.observableArrayList(
@@ -78,21 +81,7 @@ public class PatientRegistrationController {
         if (gender_cbo != null) {
             gender_cbo.setItems(genderOptions);
         }
-        /*
 
-        ObservableList<String> priorityOptions = FXCollections.observableArrayList("Resuscitation",
-            "Emergency",
-            "Urgent",
-            "Semi-urgent",
-            "Non-urgent"
-        );
-
-        // Set the priority options to the ComboBox
-        if(level_cbo != null) {
-            level_cbo.setItems(priorityOptions);
-        }
-
-         */
     }
 
     @FXML
@@ -123,15 +112,47 @@ public class PatientRegistrationController {
     }
 
 
+    double x,y;
     @FXML
     public void back(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dsa/triageapp/triageForm-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("triageForm-view.fxml"));
         Parent root = loader.load();
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        TriageFormController triageFC = loader.getController();
+        triageFC.setCounter(counter);
+        triageFC.setTriageQueue(triageQueue);
+
+        Stage newStage = new Stage(); // Create a new stage for the new scene
+
         Scene newScene = new Scene(root);
-        currentStage.setScene(newScene);
-        currentStage.centerOnScreen();
-        currentStage.show();
+        newStage.setScene(newScene);
+        newStage.centerOnScreen();
+        newStage.setResizable(false);
+        newStage.initStyle(StageStyle.TRANSPARENT);
+        newStage.setTitle("Triage Queue");
+        newStage.show();
+
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close();
+
+
+        root.setOnMousePressed(event1 -> {
+            x = event1.getSceneX();
+            y = event1.getSceneY();
+        });
+
+        root.setOnMouseDragged(event1 -> {
+            newStage.setX(event1.getScreenX() - x);
+            newStage.setY(event1.getScreenY() - y);
+        });
+
+        root.setOnMouseReleased(event1 -> newStage.setOpacity(1));
+
+    }
+
+    public void setCounterAndQueue(int[] counter, TriageQueue triageQueue){
+        this.counter = counter;
+        this.triageQueue = triageQueue;
     }
 
 }

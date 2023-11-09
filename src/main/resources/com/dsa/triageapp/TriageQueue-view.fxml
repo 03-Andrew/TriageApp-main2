@@ -16,7 +16,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="631.0" prefWidth="844.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dsa.triageapp.TriageQueueController">
    <center>
-      <AnchorPane prefHeight="644.0" prefWidth="893.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+      <AnchorPane onDragDetected="#treatPatient" prefHeight="644.0" prefWidth="893.0" style="-fx-background-color: white;" stylesheets="@../css/Style.css" BorderPane.alignment="CENTER">
          <children>
             <Text layoutX="24.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Triage Queue">
                <font>
@@ -52,11 +52,23 @@
                   </Label>
                </children>
             </HBox>
-            <TableView layoutX="26.0" layoutY="102.0" prefHeight="200.0" prefWidth="795.0">
+            <TableView fx:id="queueTable" layoutX="26.0" layoutY="102.0" prefHeight="200.0" prefWidth="795.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="level" prefWidth="82.5" text="Prio Level" />
+                <TableColumn fx:id="name" prefWidth="99.5" text="Name" />
+                  <TableColumn fx:id="age" prefWidth="41.0" text="Age" />
+                  <TableColumn fx:id="gender" prefWidth="53.66668701171875" text="Gender" />
+                  <TableColumn fx:id="number" prefWidth="166.33331298828125" text="Contact number" />
+                  <TableColumn fx:id="complaint" prefWidth="181.0" text="Complaint" />
+                  <TableColumn fx:id="condition" prefWidth="169.5" text="Condition" />
               </columns>
+               <effect>
+                  <DropShadow height="5.0" radius="2.0" width="5.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.7058823704719543" blue="0.7058823704719543" />
+                     </color>
+                  </DropShadow>
+               </effect>
             </TableView>
             <ListView fx:id="listView1" layoutX="28.0" layoutY="400.0" prefHeight="145.0" prefWidth="258.0" />
             <ListView fx:id="listView2" layoutX="296.0" layoutY="400.0" prefHeight="145.0" prefWidth="258.0" />
@@ -103,7 +115,7 @@
                   </DropShadow>
                </effect>
             </Button>
-            <Button fx:id="treatBtn" layoutX="164.0" layoutY="312.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="258.0" style="-fx-background-color: White;" stylesheets="@../css/Style.css" text="Treat Patient">
+            <Button fx:id="treatBtn" layoutX="176.0" layoutY="309.0" mnemonicParsing="false" onAction="#treatPatient" prefHeight="25.0" prefWidth="258.0" style="-fx-background-color: White;" stylesheets="@../css/Style.css" text="Treat Patient">
                <effect>
                   <DropShadow height="5.0" radius="2.0" width="5.0">
                      <color>
@@ -115,7 +127,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="skipBtn" layoutX="429.0" layoutY="312.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="258.0" style="-fx-background-color: White;" text="Skip Patient">
+            <Button fx:id="skipBtn" layoutX="441.0" layoutY="309.0" mnemonicParsing="false" onAction="#skipPatient" prefHeight="25.0" prefWidth="258.0" style="-fx-background-color: White;" text="Skip Patient">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -128,9 +140,9 @@
                </effect>
             </Button>
             <Line endX="698.0" layoutX="122.0" layoutY="358.0" startX="-100.0" stroke="#b5b4b4" />
-            <Button layoutX="-1.0" layoutY="607.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="&lt;">
+            <Button layoutX="-1.0" layoutY="587.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: Transparent; -fx-cursor: Hand;" text="&lt;">
                <font>
-                  <Font name="System Bold" size="16.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
             </Button>
          </children>
