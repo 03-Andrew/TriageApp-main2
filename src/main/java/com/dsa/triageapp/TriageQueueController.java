@@ -114,6 +114,9 @@ public class TriageQueueController {
         nUrgentLbl.setText("Non-urgent: " + counter[4]);
     }
     public void initialize(){
+        loadToListView("Station1",listView1);
+        loadToListView("Station2",listView2);
+        loadToListView("Station3",listView3);
         level.setCellValueFactory(new PropertyValueFactory<>("priorityLevel"));
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         age.setCellValueFactory(new PropertyValueFactory<>("age")); // Use lowercase 'age'
@@ -208,26 +211,26 @@ public class TriageQueueController {
 
     public void sendToStation(TriageTicket patient){
 
-        String[] info = {"Patient: " + patient.getName(),
-                "Priority level: " + patient.getPriorityLevel(),
-                "Age: " + patient.getAge() + "\tGender: " + patient.getGender(),
-                "Contact number: " + patient.getNumber(),
-                "Chief Complaint: " + patient.getChiefComplaint(),
-                "Current Condition: " + patient.getCurrentCondition(),
-                "Current Medication: " + patient.getCurrentMedication()};
+        String[] info = {patient.getName(),patient.getPriorityLevel(),
+                patient.getAge() + ", " + patient.getGender(),
+                patient.getNumber(), patient.getChiefComplaint(),
+                patient.getCurrentCondition(), patient.getCurrentMedication()};
 
         if(isStationAvailable[0]){
             treatingLbl1.setText("Station 1");
             listView1.getItems().addAll(info);
             isStationAvailable[0] = false;
+            saveToFile(info, "Station1");
         } else if (isStationAvailable[1]){
             treatingLbl2.setText("Station 2");
             listView2.getItems().addAll(info);
             isStationAvailable[1] = false;
+            saveToFile(info, "Station2");
         } else if (isStationAvailable[2]){
             treatingLbl3.setText("Station 3");
             listView3.getItems().addAll(info);
             isStationAvailable[2] = false;
+            saveToFile(info, "Station3");
         }
     }
     public void nextPatient1(){
@@ -238,6 +241,7 @@ public class TriageQueueController {
         isStationAvailable[0] = true;
         listView1.getItems().clear();
         treatingLbl1.setText("Station 1 | Next Patient");
+        clearFile("Station1");
     }
     public void nextPatient2(){
         if(isStationAvailable[1]){
@@ -247,6 +251,7 @@ public class TriageQueueController {
         isStationAvailable[1] = true;
         listView2.getItems().clear();
         treatingLbl2.setText("Station 2 | Next Patient");
+        clearFile("Station2");
     }
     public void nextPatient3(){
         if(isStationAvailable[2]){
@@ -256,8 +261,24 @@ public class TriageQueueController {
         isStationAvailable[2] = true;
         listView3.getItems().clear();
         treatingLbl3.setText("Station 3 | Next Patient");
+        clearFile("Station3");
     }
 
+    public void clearFile(String file){
+        DataBase db = new DataBase(file);
+        db.storeToFile("");
+    }
+    public void saveToFile(String[] message, String file){
+        DataBase db = new DataBase(file);
+        String txt = message[0] +"#"+message[1]+"#"+message[3]+"#"+message[4]+"#"+
+                message[5]+"#"+message[6];
+        db.storeToFile(txt);
+    }
+    public void loadToListView(String file, ListView<String> listView){
+        DataBase db = new DataBase(file);
+        String[] info = db.getFileText().split("#");
+        listView.getItems().addAll(info);
+    }
 
 
     public void fillTable(){
